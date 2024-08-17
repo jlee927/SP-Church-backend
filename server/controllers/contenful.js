@@ -79,8 +79,34 @@ const getSingleAnnouncement = async (req, res) => {
    }
 };
 
+const getAllSermonAnnouncement = async (req, res) => {
+   try {
+      let sermonData = [];
+      const { content_type } = req.params;
+      const entries = await contentfulClient.getEntries({
+         content_type: content_type,
+      });
+
+      for (let i = 0; i < entries.items.length; i++) {
+         let dateObject = parseDate(entries.items[i].sys.createdAt) 
+         sermonData.push({
+            id: entries.items[i].sys.id,
+            title: entries.items[i].fields.title,
+            video: entries.items[i].fields.videoUrl || "n/a",
+            isVideo: entries.items[i].fields.isVideo,
+            createdDate: dateObject 
+         });
+         console.log(sermonData);
+      }
+      res.json(sermonData);
+   } catch (err) {
+      console.log(err);
+   }
+};
+
 module.exports = {
    getSlideshow,
    getAnnouncements,
    getSingleAnnouncement,
+   getAllSermonAnnouncement,
 };
