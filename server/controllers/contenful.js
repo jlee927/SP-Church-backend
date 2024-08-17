@@ -93,10 +93,11 @@ const getAllSermonAnnouncement = async (req, res) => {
             id: entries.items[i].sys.id,
             title: entries.items[i].fields.title,
             video: entries.items[i].fields.videoUrl || "n/a",
+            description: entries.items[i].fields.description || "n/a",
             isVideo: entries.items[i].fields.isVideo,
             createdDate: dateObject 
          });
-         console.log(sermonData);
+         // console.log(sermonData);
       }
       res.json(sermonData);
    } catch (err) {
