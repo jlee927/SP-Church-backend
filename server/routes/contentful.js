@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/slideshow", getSlideshow);
 
 //news routes
-router.get("/all-news-announcement", getAnnouncements);
+router.get("/all-news-announcement/:content_type", getAnnouncements);
 router.get("/single-news-announcement/:id", getSingleAnnouncement);
 
 //sermon routes

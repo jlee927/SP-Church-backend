@@ -40,8 +40,9 @@ const getSlideshow = async (req, res) => {
 };
 
 const getAnnouncements = async (req, res) => {
+   const { content_type } = req.params;
    const entries = await contentfulClient.getEntries({
-      content_type: "churchNews",
+      content_type: content_type,
    });
 
    let dataForNews = [];
@@ -88,14 +89,14 @@ const getAllSermonAnnouncement = async (req, res) => {
       });
 
       for (let i = 0; i < entries.items.length; i++) {
-         let dateObject = parseDate(entries.items[i].sys.createdAt) 
+         let dateObject = parseDate(entries.items[i].sys.createdAt);
          sermonData.push({
             id: entries.items[i].sys.id,
             title: entries.items[i].fields.title,
             video: entries.items[i].fields.videoUrl || "n/a",
             description: entries.items[i].fields.description || "n/a",
             isVideo: entries.items[i].fields.isVideo,
-            createdDate: dateObject 
+            createdDate: dateObject,
          });
          // console.log(sermonData);
       }
