@@ -110,7 +110,7 @@ const getSingleSermon = async (req, res) => {
       const { id } = req.params;
       const entry = await contentfulClient.getEntry(id);
       console.log(entry.fields.title);
-      let dateObject = parseDate(entries.items[i].sys.createdAt);
+      let dateObject = parseDate(entry.sys.createdAt);
       let sermonData = {
          id: entry.sys.id,
          title: entry.fields.title,
