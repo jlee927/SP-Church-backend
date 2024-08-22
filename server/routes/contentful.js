@@ -3,6 +3,7 @@ const {
    getSlideshow,
    getSingleAnnouncement,
    getAllSermonAnnouncement,
+   getSingleSermon,
    getRecentPosts
 } = require("../controllers/contenful");
 
@@ -18,7 +19,7 @@ router.get("/single-news-announcement/:id", getSingleAnnouncement);
 
 //sermon routes
 router.get("/all-sermon-announcement/:content_type", getAllSermonAnnouncement)
-
+router.get("/single-sermon/:id", getSingleSermon)
 //for recent posts
 router.get("/recent-posts", getRecentPosts)
 module.exports = router;

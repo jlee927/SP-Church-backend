@@ -98,8 +98,26 @@ const getAllSermonAnnouncement = async (req, res) => {
             isVideo: entries.items[i].fields.isVideo,
             createdDate: dateObject,
          });
-         // console.log(sermonData);
       }
+      res.json(sermonData);
+   } catch (err) {
+      console.log(err);
+   }
+};
+
+const getSingleSermon = async (req, res) => {
+   try {
+      const { id } = req.params;
+      const entry = await contentfulClient.getEntry(id);
+      console.log(entry.fields.title);
+      let sermonData = {
+         id: entry.sys.id,
+         title: entry.fields.title,
+         video: entry.fields.videoUrl || "n/a",
+         description: entry.fields.description || "n/a",
+         isVideo: entry.fields.isVideo,
+         createdDate: parseDate(entry.sys.createdAt),
+      };
       res.json(sermonData);
    } catch (err) {
       console.log(err);
@@ -129,5 +147,6 @@ module.exports = {
    getAnnouncements,
    getSingleAnnouncement,
    getAllSermonAnnouncement,
+   getSingleSermon,
    getRecentPosts,
 };
