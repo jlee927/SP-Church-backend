@@ -110,10 +110,10 @@ const getRecentPosts = async (req, res) => {
    try {
       let newestPostData = [];
       const entries = await contentfulClient.getEntries({
-         select: "sys.id, sys.createdAt, sys.contentType",
+         select: "sys.id, sys.createdAt, sys.contentType, fields",
          "sys.contentType.sys.id[nin]": "mediaForSlideshow",
          order: "-sys.createdAt",
-         limit: 4,
+         limit: 5,
       });
 
       newestPostData = entries;
