@@ -2,7 +2,8 @@ const {
    getAnnouncements,
    getSlideshow,
    getSingleAnnouncement,
-   getAllSermonAnnouncement
+   getAllSermonAnnouncement,
+   getRecentPosts
 } = require("../controllers/contenful");
 
 const express = require("express");
@@ -17,4 +18,7 @@ router.get("/single-news-announcement/:id", getSingleAnnouncement);
 
 //sermon routes
 router.get("/all-sermon-announcement/:content_type", getAllSermonAnnouncement)
+
+//for recent posts
+router.get("/recent-posts", getRecentPosts)
 module.exports = router;

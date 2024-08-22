@@ -106,9 +106,28 @@ const getAllSermonAnnouncement = async (req, res) => {
    }
 };
 
+const getRecentPosts = async (req, res) => {
+   try {
+      let newestPostData = [];
+      const entries = await contentfulClient.getEntries({
+         select: "sys.id, sys.createdAt, sys.contentType",
+         "sys.contentType.sys.id[nin]": "mediaForSlideshow",
+         order: "-sys.createdAt",
+         limit: 4,
+      });
+
+      newestPostData = entries;
+      // console.log(newestPostData);
+      res.send(entries);
+   } catch (err) {
+      console.log(err);
+   }
+};
+
 module.exports = {
    getSlideshow,
    getAnnouncements,
    getSingleAnnouncement,
    getAllSermonAnnouncement,
+   getRecentPosts,
 };
