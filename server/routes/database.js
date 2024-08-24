@@ -25,6 +25,20 @@ router.get("/get-comments/:postID", (req, res) => {
       });
 });
 
+router.get("/recent-comments", (req, res) => {
+   Comments.find()
+      .sort({
+         createdAt: -1,
+      })
+      .limit(5)
+      .then((result) => {
+         res.send(result);
+      })
+      .catch((err) => {
+         console.log(err);
+      });
+});
+
 router.post("/comment", (req, res) => {
    const { name, email, comment, website, postID } = req.body;
    const commentInstance = new Comments({
